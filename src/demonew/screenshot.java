@@ -14,6 +14,8 @@ public class screenshot
 
 public static void screenimage(WebDriver driver, String screenname) throws Throwable
 	{
+	
+	    //This method is used to take screenshot
 		TakesScreenshot ts = (TakesScreenshot) driver;
 		File srcfile = ts.getScreenshotAs(OutputType.FILE);
 		File destfile = new File("./testdata/"+screenname+".png");
