@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"	standalone="no"?>									
+	<project name="YTMonetize" basedir=".">
+	<property name="build.dir" value="${basedir}/build"/>								
+    <property name="external.jars" value=".\resources"/>								
+		<property name="ytoperation.dir" value="${external.jars}/YTOperation"/>
+		<property name="src.dir" value="${basedir}/src"/>
+			<target name="setClassPath">
+			<path id="classpath_jars">
+			<pathelement path="${basedir}/"/>
+			</path>
+			<pathconvert pathsep=";" property="test.classpath" refid="classpath_jars"/>
+			</target>
+			<fileset dir="${ytoperation.dir}" includes="*.jar"/>
+			<target name="clean">
+<echo message="deleting existing build directory"/>
+<delete dir="${build.dir}"/>
+</target>
+<target name="compile" depends="clean,setclasspath">
+<echo message="classpath:${test.classpath}"/>
+<echo message="compiling....."/>
+<mkdir dir="${build.dir}"/>
+<echo message="classpath:${test.classpath}"/>
+<echo message="compiling....."/>
+      <javac destdir="${build.dir}" srcdir="${src.dir}">
+	<classpath refid="classpath_jars"/>
+</javac>
+<jar destfile="${ytoperation.dir}/YTOperation.jar" basedir="${build.dir}">
+<manifest>
+    <attribute name="main class" value="test.main"/>
+</manifest>
+</jar>
+</target>
+<target name="run" depends="compile">
+<java jar="${ytoperation.dir}/YTOperation.jar" fork="true"/>
+</target>
+</project>
